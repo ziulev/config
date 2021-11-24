@@ -1,0 +1,44 @@
+{
+	"analytics-uuid": "44925a7c-a6f1-47cd-be43-87e94693bb4f",
+	"motd": {
+		"cloudBuildErrorAfter": 1594252800000,
+		"cloudBuildWarnAfter": 1590019200000,
+		"defaultNode10After": 1594252800000,
+		"minVersion": "3.0.5",
+		"node8DeploysDisabledAfter": 1613390400000,
+		"node8RuntimeDisabledAfter": 1615809600000,
+		"node8WarnAfter": 1600128000000,
+		"fetched": 1637365970947
+	},
+	"usage": false,
+	"user": {
+		"iss": "accounts.google.com",
+		"azp": "563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com",
+		"aud": "563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com",
+		"sub": "117081806631365785462",
+		"email": "zzulev@gmail.com",
+		"email_verified": true,
+		"at_hash": "ofmGz-N8qvuyM_-JpwkICA",
+		"iat": 1637365979,
+		"exp": 1637369579
+	},
+	"tokens": {
+		"expires_at": 1637369724806,
+		"refresh_token": "1//09O_aqg7vnVBiCgYIARAAGAkSNwF-L9IrtA8VMQE9EcBVwL859NIREJ47x-VTzxWpmOqg9IPlv552kgjPtkioIuoJJ_Hgbc64a3A",
+		"scopes": [
+			"email",
+			"https://www.googleapis.com/auth/cloud-platform",
+			"https://www.googleapis.com/auth/cloudplatformprojects.readonly",
+			"https://www.googleapis.com/auth/firebase",
+			"openid"
+		],
+		"access_token": "ya29.a0ARrdaM-jWozNYIEjPnQz7aC4uZU1qedLfQdTqQHJgvRp9s7iugQU8aIlvEq3nwwG_5bD5WyQQ4nQQ3vgTuT-qk1dilF3GUXtz6LsRxaxqEjMQxBdGasd8rjA-rKVX4BjLSyjKGa9KavTLyGI1jbAHZUUU-5KVZlpij-2",
+		"expires_in": 3599,
+		"scope": "openid https://www.googleapis.com/auth/firebase https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/cloudplatformprojects.readonly",
+		"token_type": "Bearer",
+		"id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAzMmIyZWYzZDJjMjgwNjE1N2Y4YTliOWY0ZWY3Nzk4MzRmODVhZGEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNTYzNTg0MzM1ODY5LWZncmhnbWQ0N2JxbmVraWo1aThiNXByMDNobzg0OWU2LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNTYzNTg0MzM1ODY5LWZncmhnbWQ0N2JxbmVraWo1aThiNXByMDNobzg0OWU2LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTE3MDgxODA2NjMxMzY1Nzg1NDYyIiwiZW1haWwiOiJ6enVsZXZAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiI1aUxjSlBGTTFZTGJSWjJBZzJ2RlVnIiwiaWF0IjoxNjM3MzY2MTI1LCJleHAiOjE2MzczNjk3MjV9.U0VLtF6FPf5YGGf6Ec2_NbBKWSgiO9x8kB64BvAGQfVF25RMJJ_dwFAlE50FPjEH4otyPQ06kXzjGCak2HUnaiGOrnydNLPPFDYcF2zYy9UxbUg12nQc67f-1qRsL3BOF1R8cSjHZ2-6eWX8vUVEMzpcbJ_N0xKHjfh9CBTEog0Wdz0qKUK5T4M62VyP-jSLao0aKYM1Ryu4dy9ytXSWSIhLizAzYa-qz09hkOkG63SP5uRZZfjh_Ab9fJBUR05EuEQTRjEjFFRE4qir1R00CEXYHWmuL231856GHnCgrXROT5OTHdSuO5CvnzahAOP0wH2yH6NQ6UhiZ6ROGpAj_Q"
+	},
+	"activeProjects": {
+		"/Users/denis/Developer/not-a-market": "not-a-market"
+	}
+}

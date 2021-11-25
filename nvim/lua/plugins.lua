@@ -60,8 +60,6 @@ return require('packer').startup(function()
 
     use "christoomey/vim-tmux-navigator"
 
-    use "rmagatti/auto-session"
-
     use "dstein64/nvim-scrollview"
 
     use "windwp/nvim-ts-autotag"
@@ -95,6 +93,17 @@ return require('packer').startup(function()
     use {
         "sindrets/diffview.nvim",
         requires = "nvim-lua/plenary.nvim",
+    }
+
+    use {
+        "windwp/nvim-spectre",
+        requires = "nvim-lua/plenary.nvim",
+    }
+
+
+    use {
+        "nvim-telescope/telescope-frecency.nvim",
+        requires = {"tami5/sqlite.lua"}
     }
 
 end)

@@ -1,3 +1,5 @@
+-- vim.api.nvim_command('set noswapfile')
+
 vim.o.completeopt = "menuone,noselect"
 
 --Incremental live completion (note: this is now a default on master)
@@ -62,6 +64,11 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
+
+-- Auto indent
+vim.o.autoindent = true
+vim.o.smartindent = true
+
 
 -- vim.opt.hidden = true
 -- vim.opt.switchbuf = "useopen"

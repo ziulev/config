@@ -1,0 +1,34 @@
+{
+    "title": "Command Key to Control in Alacrity",
+    "rules": [
+      {
+        "description": "Use the left CMD key as ctrl for Alacrity",
+        "manipulators": [
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "left_command",
+              "modifiers":
+                          {
+                              "optional":
+                              [
+                                  "any"
+                              ]
+                          }
+            },
+            "to": {
+              "key_code": "left_control"
+            },
+            "conditions": [
+              {
+                "type": "frontmost_application_if",
+                "bundle_identifiers": [
+                  "^io\\.alacritty$"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

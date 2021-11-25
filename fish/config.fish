@@ -11,6 +11,7 @@ alias ys='yarn start'
 alias yi='yarn'
 
 alias vim='nvim'
+alias v='nvim'
 
 # Autostart tmux
 if status is-interactive

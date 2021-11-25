@@ -6,6 +6,7 @@ nvim_set_keymap("n", "<C-k>", ":wincmd k<CR>", default_opt)
 nvim_set_keymap("n", "<C-j>", ":wincmd j<CR>", default_opt)
 nvim_set_keymap("n", "<C-h>", ":wincmd h<CR>", default_opt)
 nvim_set_keymap("n", "<C-l>", ":wincmd l<CR>", default_opt)
+nvim_set_keymap("n", "<C-1>", ":wincmd h<CR>", default_opt)
 
 -- Go over wrapped lines
 nvim_set_keymap("n", "j", "gj", default_opt)
@@ -27,10 +28,12 @@ nvim_set_keymap("n", "<leader>rf", ":lua vim.lsp.buf.formatting()<CR>", default_
 
 
 -- Search (Telescope, defined as Lua strings)
--- nvim_set_keymap("n", "<leader>p", ':lua require"telescope.builtin".find_files()<CR>', default_opt)
-nvim_set_keymap("n", "<leader>p", ':lua require"telescope.builtin".git_files()<CR>', default_opt)
-nvim_set_keymap("n", "<leader>f", ':lua require"telescope.builtin".current_buffer_fuzzy_find({ previewer = false, sorting_strategy="ascending" })<CR>', default_opt)
+nvim_set_keymap("n", "<M-p>", ':Telescope frecency<CR>', default_opt)
+nvim_set_keymap("n", "<leader>p", ':Telescope frecency<CR>', default_opt)
 nvim_set_keymap("n", "<leader>P", ':lua require"telescope.builtin".buffers()<CR>', default_opt)
+nvim_set_keymap("n", "<leader>fb", ':lua require"telescope.builtin".git_branches()<CR>', default_opt)
+nvim_set_keymap("n", "<leader>fr", ":Telescope resume<CR>", default_opt)
+nvim_set_keymap("n", "<leader>fp", ":Telescope pickers<CR>", default_opt)
 
 
 -- GoTo
@@ -43,9 +46,12 @@ nvim_set_keymap("n", "gh", ":lua vim.lsp.buf.hover()<CR>", default_opt)
 nvim_set_keymap("n", "gf", "gf", default_opt)
 
 -- Tree
+nvim_set_keymap("n", "<M-b>", ":NvimTreeToggle<CR>", default_opt)
+nvim_set_keymap("n", "<M-e>", ":NvimTreeToggle<CR>", default_opt)
+nvim_set_keymap("n", "<M-E>", ":NvimTreeFocus<CR>", default_opt)
 nvim_set_keymap("n", "<leader>b", ":NvimTreeToggle<CR>", default_opt)
 nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", default_opt)
--- nvim_set_keymap("n", "<leader>E", ":NvimTreeFocus<CR>", default_opt)
+nvim_set_keymap("n", "<leader>E", ":NvimTreeFocus<CR>", default_opt)
 
 
 -- Tabs
@@ -53,9 +59,24 @@ nvim_set_keymap("n", "H", ":BufferPrevious<CR>", default_opt)
 nvim_set_keymap("n", "L", ":BufferNext<CR>", default_opt)
 nvim_set_keymap("n", "<leader>H", ":BufferMovePrevious<CR>", default_opt)
 nvim_set_keymap("n", "<leader>L", ":BufferMoveNext<CR>", default_opt)
-nvim_set_keymap("n", "<leader>w", ":BufferClose<CR>", default_opt)
+nvim_set_keymap("n", "<M-w>", ":BufferClose<CR>", default_opt)
+nvim_set_keymap("n", "<M-W>", ":BufferCloseAllButCurrent<CR>", default_opt)
 
 
 -- Neogit
-nvim_set_keymap("n", "<leader>g", ":Neogit<CR>", default_opt)
+nvim_set_keymap("n", "<leader>G", ":Neogit<CR>", default_opt)
+nvim_set_keymap("n", "<M-g>", ":Neogit<CR>", default_opt)
+nvim_set_keymap("n", "<leader>g", ":DiffviewOpen<CR>", default_opt)
+nvim_set_keymap("n", "<leader>gw", ":DiffviewClose<CR>", default_opt)
+
+
+-- Paste
+nvim_set_keymap("n", "p", "m`o<ESC>p``", default_opt)
+nvim_set_keymap("n", "P", "m`O<ESC>p``", default_opt)
+
+
+-- Spectre
+nvim_set_keymap("n", "<M-f>", ":lua require('spectre').open()<CR>", default_opt)
+nvim_set_keymap("n", "<M-F>", ":lua require('spectre').open_file_search()<cr>", default_opt)
+
 

@@ -34,8 +34,50 @@ lsp_installer.on_server_ready(function(server)
 end)
 
 
+-- Telescope
+local actions = require('telescope.actions')
+require('telescope').setup{
+    extensions = {
+        frecency = {
+            default_workspace = 'CWD',
+        },
+    },
+    sorting_strategy = "ascending",
+    defaults = {
+        preview = false,
+        prompt_prefix = " ",
+        selection_caret = " ",
+        entry_prefix = " ",
+        -- border = false,
+        layout_config = {
+            horizontal = {
+                height = 0.4,
+                preview_cutoff = 120,
+                prompt_position = "top",
+                width = 0.92
+            },
+        },
+        file_ignore_patterns = {
+            "node_modules",
+            "dist"
+        },
+        mappings = {
+            i = {
+                ["<esc>"] = actions.close
+            },
+        },
+    },
+}
+require"telescope".load_extension("frecency")
+
+
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
+    defaults = {
+        layout_config = {
+            vertical = { width = 0.5 },
+        },
+    },
     highlight = {
         enable = true,
         disable = {},
@@ -143,18 +185,6 @@ cmp.setup.cmdline(':', {
 })
 
 
--- Telescope
-
-require('telescope').setup{
-    defaults = {
-        file_ignore_patterns = {
-            "node_modules",
-            "dist"
-        }
-    }
-}
-
-
 -- Icons
 require'nvim-web-devicons'.setup {}
 
@@ -210,19 +240,20 @@ require("commented").setup({
 
 
 -- Auto Session
-local function restore_nvim_tree()
-    local nvim_tree = require('nvim-tree')
-    nvim_tree.change_dir(vim.fn.getcwd())
-    nvim_tree.refresh()
-    nvim_tree.toggle()
-end
-require('auto-session').setup {
-    post_restore_cmds = {restore_nvim_tree, "wincmd h"},
-    pre_save_cmds = {"NvimTreeClose"}
-}
+-- local function restore_nvim_tree()
+    -- local nvim_tree = require('nvim-tree')
+    -- nvim_tree.change_dir(vim.fn.getcwd())
+    -- nvim_tree.refresh()
+    -- nvim_tree.toggle()
+-- end
+-- require('auto-session').setup {
+    -- post_restore_cmds = {restore_nvim_tree, "wincmd h"},
+    -- pre_save_cmds = {"NvimTreeClose"}
+-- }
 
 
 -- TREE
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup {
     auto_close = true,
     update_focused_file = {
@@ -233,6 +264,11 @@ require'nvim-tree'.setup {
         width = 40,
         height = 30,
         side = 'right',
+        mappings = {
+            list = {
+                { key = {"h", "l"}, cb = tree_cb("edit") },
+            }
+        }
     }
 }
 
@@ -278,10 +314,6 @@ require'treesitter-context'.setup{
 require('numb').setup()
 
 
--- Tabs
--- require('cokeline').setup({})
-
-
 -- Git signs
 require('gitsigns').setup()
 
@@ -291,6 +323,103 @@ require('neogit').setup({})
 
 
 -- Git diff
-require'diffview'.setup{}
+local cb = require'diffview.config'.diffview_callback
+require'diffview'.setup{
+  file_panel = {
+    position = "right",            -- One of 'left', 'right', 'top', 'bottom'
+    width = 40,                   -- Only applies when position is 'left' or 'right'
+    height = 10,                  -- Only applies when position is 'top' or 'bottom'
+  },
+  key_bindings = {
+    view = {
+      ["<tab>"]      = cb("select_next_entry"),  -- Open the diff for the next file
+      ["<s-tab>"]    = cb("select_prev_entry"),  -- Open the diff for the previous file
+      ["gf"]         = cb("goto_file"),          -- Open the file in a new split in previous tabpage
+      ["<C-w><C-f>"] = cb("goto_file_split"),    -- Open the file in a new split
+      ["<C-w>gf"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
+      ["<leader>e"]  = cb("focus_files"),        -- Bring focus to the files panel
+      ["<leader>b"]  = cb("toggle_files"),       -- Toggle the files panel.
+    },
+    file_panel = {
+      ["j"]             = cb("next_entry"),           -- Bring the cursor to the next file entry
+      ["<down>"]        = cb("next_entry"),
+      ["k"]             = cb("prev_entry"),           -- Bring the cursor to the previous file entry.
+      ["<up>"]          = cb("prev_entry"),
+      ["<cr>"]          = cb("select_entry"),         -- Open the diff for the selected entry.
+      ["o"]             = cb("select_entry"),
+      ["<2-LeftMouse>"] = cb("select_entry"),
+      ["s"]             = cb("toggle_stage_entry"),   -- Stage / unstage the selected entry.
+      ["S"]             = cb("stage_all"),            -- Stage all entries.
+      ["U"]             = cb("unstage_all"),          -- Unstage all entries.
+      ["X"]             = cb("restore_entry"),        -- Restore entry to the state on the left side.
+      ["R"]             = cb("refresh_files"),        -- Update stats and entries in the file list.
+      ["<tab>"]         = cb("select_next_entry"),
+      ["<s-tab>"]       = cb("select_prev_entry"),
+      ["gf"]            = cb("goto_file"),
+      ["<C-w><C-f>"]    = cb("goto_file_split"),
+      ["<C-w>gf"]       = cb("goto_file_tab"),
+      ["i"]             = cb("listing_style"),        -- Toggle between 'list' and 'tree' views
+      ["f"]             = cb("toggle_flatten_dirs"),  -- Flatten empty subdirectories in tree listing style.
+      ["<leader>e"]     = cb("focus_files"),
+      ["<leader>b"]     = cb("toggle_files"),
+    },
+    file_history_panel = {
+      ["g!"]            = cb("options"),            -- Open the option panel
+      ["<C-A-d>"]       = cb("open_in_diffview"),   -- Open the entry under the cursor in a diffview
+      ["y"]             = cb("copy_hash"),          -- Copy the commit hash of the entry under the cursor
+      ["zR"]            = cb("open_all_folds"),
+      ["zM"]            = cb("close_all_folds"),
+      ["j"]             = cb("next_entry"),
+      ["<down>"]        = cb("next_entry"),
+      ["k"]             = cb("prev_entry"),
+      ["<up>"]          = cb("prev_entry"),
+      ["<cr>"]          = cb("select_entry"),
+      ["o"]             = cb("select_entry"),
+      ["<2-LeftMouse>"] = cb("select_entry"),
+      ["<tab>"]         = cb("select_next_entry"),
+      ["<s-tab>"]       = cb("select_prev_entry"),
+      ["gf"]            = cb("goto_file"),
+      ["<C-w><C-f>"]    = cb("goto_file_split"),
+      ["<C-w>gf"]       = cb("goto_file_tab"),
+      ["<leader>e"]     = cb("focus_files"),
+      ["<leader>b"]     = cb("toggle_files"),
+    },
+    option_panel = {
+      ["<tab>"] = cb("select"),
+      ["q"]     = cb("close"),
+    },
+  },
+}
+
+
+-- Barbar
+vim.g.bufferline = {
+  -- Enable/disable auto-hiding the tab bar when there is a single buffer
+  auto_hide = false,
+
+  -- Enable/disable close button
+  closable = false,
+
+  -- Configure icons on the bufferline.
+  icon_separator_active = '▎',
+  icon_separator_inactive = '▎',
+  icon_close_tab = '',
+  icon_close_tab_modified = '●',
+  icon_pinned = '車',
+
+  -- Sets the maximum padding width with which to surround each tab
+  maximum_padding = 2,
+
+  -- Sets the maximum buffer name length.
+  maximum_length = 30,
+
+  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
+  -- where X is the buffer number. But only a static string is accepted here.
+  no_name_title = nil,
+}
+
+
+-- Spectre
+require('spectre').setup()
 
 

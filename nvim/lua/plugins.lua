@@ -4,7 +4,6 @@ return require('packer').startup(function()
     -- Color scheme
     use "projekt0n/github-nvim-theme"
 
-    -- LSP
     use {
         "neovim/nvim-lspconfig",
         "williamboman/nvim-lsp-installer",
@@ -27,7 +26,7 @@ return require('packer').startup(function()
 
     use {
         "nvim-telescope/telescope.nvim",
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = "nvim-lua/plenary.nvim",
     }
 
     use {
@@ -36,7 +35,7 @@ return require('packer').startup(function()
 
     use {
         "hood/popui.nvim",
-        requires = { {"RishabhRD/popfix"} },
+        requires = "RishabhRD/popfix",
     }
 
     use {
@@ -45,7 +44,7 @@ return require('packer').startup(function()
 
     use {
         "jose-elias-alvarez/null-ls.nvim",
-        requires = { {"nvim-lua/plenary.nvim"} }
+        requires = "nvim-lua/plenary.nvim",
     }
 
     use {
@@ -75,14 +74,12 @@ return require('packer').startup(function()
 
     use {
         "romgrk/barbar.nvim",
-        requires = {"kyazdani42/nvim-web-devicons"},
+        requires = "kyazdani42/nvim-web-devicons",
     }
 
     use {
         "lewis6991/gitsigns.nvim",
-        requires = {
-            "nvim-lua/plenary.nvim",
-        },
+        requires = "nvim-lua/plenary.nvim",
     }
 
     use {
@@ -103,7 +100,7 @@ return require('packer').startup(function()
 
     use {
         "nvim-telescope/telescope-frecency.nvim",
-        requires = {"tami5/sqlite.lua"}
+        requires = "tami5/sqlite.lua",
     }
 
 end)

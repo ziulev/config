@@ -34,6 +34,62 @@ lsp_installer.on_server_ready(function(server)
 end)
 
 
+-- TREE
+vim.g.nvim_tree_show_icons = {
+    git = 1,
+    folders = 1,
+    files = 1,
+    folder_arrows = 0,
+}
+vim.g.nvim_tree_icons = {
+    git = {
+        unstaged = "◌",
+        staged = "○",
+        unmerged = "",
+        renamed = "➜",
+        untracked = "◌",
+        deleted = "-",
+    },
+    folder = {
+        default = "▸",
+        open = "▾",
+        empty = "▸",
+        empty_open = "▾",
+        symlink = "",
+        symlink_open = "",
+    }
+}
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+require'nvim-tree'.setup {
+    auto_close = true,
+    update_focused_file = {
+        enable = true,
+    },
+    view = {
+        hide_root_folder = true,
+        width = 40,
+        height = 30,
+        side = 'right',
+        mappings = {
+            list = {
+                { key = {"h", "l"}, cb = tree_cb("edit") },
+            }
+        }
+    },
+    filters = {
+        custom = {
+            ".git",
+            ".DS_Store",
+        }
+    },
+}
+-- vim.api.nvim_command("highlight! link NvimTreeIndentMarker Comment")
+vim.api.nvim_command("highlight! link NvimTreeGitDirty GitSignsChange")
+vim.api.nvim_command("highlight! link NvimTreeGitStaged GitSignsAdd")
+vim.api.nvim_command("highlight! link NvimTreeGitNew GitSignsAdd")
+vim.api.nvim_command("highlight! link NvimTreeGitDeleted GitSignsDelete")
+
+
 -- Telescope
 local actions = require('telescope.actions')
 require('telescope').setup{
@@ -69,6 +125,10 @@ require('telescope').setup{
     },
 }
 require"telescope".load_extension("frecency")
+
+
+-- Delete buffers
+require('close_buffers').setup({})
 
 
 -- Treesitter
@@ -252,27 +312,6 @@ require("commented").setup({
 -- }
 
 
--- TREE
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-require'nvim-tree'.setup {
-    auto_close = true,
-    update_focused_file = {
-        enable = true,
-    },
-    view = {
-        hide_root_folder = true,
-        width = 40,
-        height = 30,
-        side = 'right',
-        mappings = {
-            list = {
-                { key = {"h", "l"}, cb = tree_cb("edit") },
-            }
-        }
-    }
-}
-
-
 -- Indent
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
@@ -291,6 +330,7 @@ require'treesitter-context'.setup{
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
     throttle = true, -- Throttles plugin updates (may improve performance)
     max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+    -- TODO: check JSON support
     -- patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
         -- default = {
             -- 'class',
@@ -309,6 +349,7 @@ require'treesitter-context'.setup{
         -- --   },
     -- },
 }
+
 
 -- Select line
 require('numb').setup()
@@ -394,27 +435,12 @@ require'diffview'.setup{
 
 -- Barbar
 vim.g.bufferline = {
-  -- Enable/disable auto-hiding the tab bar when there is a single buffer
   auto_hide = false,
-
-  -- Enable/disable close button
   closable = false,
-
-  -- Configure icons on the bufferline.
   icon_separator_active = '▎',
   icon_separator_inactive = '▎',
-  icon_close_tab = '',
-  icon_close_tab_modified = '●',
-  icon_pinned = '車',
-
-  -- Sets the maximum padding width with which to surround each tab
   maximum_padding = 2,
-
-  -- Sets the maximum buffer name length.
   maximum_length = 30,
-
-  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
-  -- where X is the buffer number. But only a static string is accepted here.
   no_name_title = nil,
 }
 

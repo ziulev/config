@@ -66,6 +66,7 @@ nvim_set_keymap("n", "<M-W>", ":BufferCloseAllButCurrent<CR>", default_opt)
 -- Neogit
 nvim_set_keymap("n", "<leader>G", ":Neogit<CR>", default_opt)
 nvim_set_keymap("n", "<M-g>", ":Neogit<CR>", default_opt)
+nvim_set_keymap("n", "<C-G>", ":Neogit<CR>", default_opt)
 nvim_set_keymap("n", "<leader>g", ":DiffviewOpen<CR>", default_opt)
 nvim_set_keymap("n", "<leader>gw", ":DiffviewClose<CR>", default_opt)
 

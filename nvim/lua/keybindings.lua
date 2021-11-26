@@ -23,6 +23,7 @@ nvim_set_keymap("v", "<C-k>", ":m '<-2<CR>gv=gv", default_opt)
 -- Edit
 nvim_set_keymap("n", "<leader>rn", "<cmd>lua require('lspsaga.rename').rename()<CR>", default_opt)
 nvim_set_keymap("v", "<leader>rs", ":'<,'>sort<CR>", default_opt)
+nvim_set_keymap("n", "<M-.>", ":lua vim.lsp.buf.code_action()<CR>", default_opt)
 nvim_set_keymap("n", "<leader>.", ":lua vim.lsp.buf.code_action()<CR>", default_opt)
 nvim_set_keymap("n", "<leader>rf", ":lua vim.lsp.buf.formatting()<CR>", default_opt)
 

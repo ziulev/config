@@ -23,7 +23,8 @@ vim.o.breakindent = true
 vim.opt.undofile = true
 
 --Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true vim.o.smartcase = true --Decrease update time
+vim.o.ignorecase = true
+vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
@@ -69,6 +70,12 @@ vim.opt.shiftwidth = 4
 vim.o.autoindent = true
 vim.o.smartindent = true
 
+
+-- Scropp offset
+vim.o.scrolloff = 10
+
+-- Wrap
+vim.wo.wrap = false
 
 -- vim.opt.hidden = true
 -- vim.opt.switchbuf = "useopen"

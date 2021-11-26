@@ -103,5 +103,8 @@ return require('packer').startup(function()
         requires = "tami5/sqlite.lua",
     }
 
+    use "lewis6991/spellsitter.nvim"
+
+
 end)
 

@@ -77,9 +77,9 @@ vim.o.scrolloff = 10
 -- Wrap
 vim.wo.wrap = false
 
--- vim.opt.hidden = true
--- vim.opt.switchbuf = "useopen"
 
--- Noswap files
--- vim.o.noswapfile = true
+-- Vertical line
+vim.cmd([[:set colorcolumn=80]])
+vim.cmd[[au VimEnter * highlight ColorColumn guibg=#252b32]]
+
 

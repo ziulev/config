@@ -6,10 +6,7 @@ vim.o.completeopt = "menuone,noselect"
 vim.o.inccommand = 'nosplit'
 
 --Set highlight on search
-vim.o.hlsearch = false
-
---Make line numbers default
-vim.wo.number = true
+vim.o.hlsearch = false --Make line numbers default vim.wo.number = true
 
 --Do not save when switching buffers (note: this is now a default on master)
 vim.o.hidden = true

@@ -100,7 +100,15 @@ local actions = require('telescope.actions')
 require('telescope').setup{
     extensions = {
         frecency = {
-            default_workspace = 'CWD',
+            default_workspace = "CWD",
+            ignore_patterns = {
+                "*.git/*",
+                "*/tmp/*",
+                "*/dist/*",
+                "*/build/*",
+                "*/node_modules/*",
+                "*/pods/*",
+            },
         },
     },
     sorting_strategy = "ascending",
@@ -178,7 +186,43 @@ local has_words_before = function()
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
+local lsp_kinds = {
+    Text                  = {''  , 'TSText'        } ,
+    -- Method                = {'ƒ'  , 'TSMethod'      } ,
+    Method                = {'M'  , 'TSMethod'      } ,
+    Function              = {'ƒ'  , 'TSFunction'    } ,
+    Constructor           = {''  , 'TSConstructor' } ,
+    Field                 = {'⌘'  , 'TSField'       } ,
+    Variable              = {''  , 'TSVariable'    } ,
+    Class                 = {''  , 'TSConstructor' } ,
+    Interface             = {''  , 'TSAnnotation'  } ,
+    Module                = {''  , 'TSConstant'    } ,
+    Property              = {''  , 'TSProperty'    } ,
+    Unit                  = {''  , 'TSTag'         } ,
+    Value                 = {''  , 'TSValue'       } ,
+    Enum                  = {'了' , 'TSMethod'      } ,
+    Keyword               = {''  , 'TSKeyword'     } ,
+    Snippet               = {'﬌'  , 'TSLabel'       } ,
+    Color                 = {''  , 'TSBoolean'     } ,
+    File                  = {''  , 'TSSymbol'      } ,
+    Reference             = {''  , 'TSReference'   } ,
+    Folder                = {''  , 'Directory'     } ,
+    EnumMember            = {''  , 'TSPunctSpecial'} ,
+    Constant              = {''  , 'TSConstant'    } ,
+    Struct                = {''  , 'TSStruct'      } ,
+    Event                 = {''  , 'TSEvent'       } ,
+    Operator              = {''  , 'TSOperator'    } ,
+    TypeParameter         = {''  , 'TSType'        } ,
+}
 cmp.setup({
+    formatting={
+        fields = { 'kind', 'abbr', 'menu' },
+        format = function(_, vim_item)
+            vim_item.kind_highlight = lsp_kinds[vim_item.kind][2]
+            vim_item.kind = lsp_kinds[vim_item.kind][1]
+            return vim_item
+        end,
+    },
     snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
@@ -189,46 +233,61 @@ cmp.setup({
         end,
     },
     mapping = {
-        ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-        ['<C-e>'] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-        }),
-
+        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<Tab>'] = function(fallback)
-            if not cmp.select_next_item() then
-                if vim.bo.buftype ~= 'prompt' and has_words_before() then
-                    cmp.complete()
-                else
-                    fallback()
-                end
+          if not cmp.select_next_item() then
+            if vim.bo.buftype ~= 'prompt' and has_words_before() then
+              cmp.complete()
+            else
+              fallback()
             end
+          end
         end,
 
         ['<S-Tab>'] = function(fallback)
-            if not cmp.select_prev_item() then
-                if vim.bo.buftype ~= 'prompt' and has_words_before() then
-                    cmp.complete()
-                else
-                    fallback()
-                end
+          if not cmp.select_prev_item() then
+            if vim.bo.buftype ~= 'prompt' and has_words_before() then
+              cmp.complete()
+            else
+              fallback()
             end
+          end
         end,
-
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
+        { name = "nvim_lsp" },
+        { name = "path" },
         -- { name = 'vsnip' }, -- For vsnip users.
         -- { name = 'luasnip' }, -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
     }, {
         { name = 'buffer' },
-    })
+    }),
+    completion = { keyword_length = 2, },
+    experimental = {
+        -- native_menu = true,
+    },
+    -- sorting = {
+        -- comparators = {
+            -- cmp.config.compare.offset,
+            -- cmp.config.compare.exact,
+            -- cmp.config.compare.score,
+            -- cmp.config.compare.order,
+            -- cmp.config.compare.recently_used,
+            -- cmp.config.compare.kind,
+            -- cmp.config.compare.sort_text,
+            -- cmp.config.compare.length,
+        -- }
+
+      -- function(...)
+        -- if vim.api.nvim_get_mode().mode:sub(1, 1) ~= 'c' then
+          -- return cmp_buffer:compare_locality(...)
+        -- end
+      -- end,
+
+    -- }
 })
 
 cmp.setup.cmdline('/', {
@@ -261,8 +320,8 @@ require "lsp_signature".setup({
     handler_opts = {
         border = "rounded"
     },
-    floating_window = false,
-    hint_enable = true,
+    floating_window = true,
+    hint_enable = false,
     hint_prefix = "",
     transparency = 50,
 })
@@ -357,7 +416,9 @@ require('numb').setup()
 
 
 -- Git signs
-require('gitsigns').setup()
+require('gitsigns').setup({})
+vim.cmd[[au VimEnter * highlight MoreMsg guibg=#252b32]]
+
 
 
 -- Neogit
@@ -446,7 +507,7 @@ vim.g.bufferline = {
 }
 
 
--- Spectre
+-- Search and replace
 require('spectre').setup()
 
 
@@ -455,5 +516,87 @@ require('spellsitter').setup({
     enable = true,
     hl = 'LspDiagnosticsUnderlineWarning',
 })
+
+-- Lualine
+local colors = {
+  text = "#626a74",
+  red = "#ff5189",
+  bg = "#252b32",
+  code = "#a9b6c3",
+  transparent = "#22272e"
+}
+
+local bubbles_theme = {
+  normal = {
+    a = { fg = colors.text, bg = colors.bg },
+    c = { fg = colors.text, bg = colors.transparent },
+  },
+}
+
+local conditions = {
+    buffer_not_empty = function()
+        return vim.fn.empty(vim.fn.expand '%:t') ~= 1
+    end,
+        hide_in_width = function()
+        return vim.fn.winwidth(0) > 80
+    end,
+    check_git_workspace = function()
+        local filepath = vim.fn.expand '%:p:h'
+        local gitdir = vim.fn.finddir('.git', filepath .. ';')
+        return gitdir and #gitdir > 0 and #gitdir < #filepath
+    end,
+}
+require('lualine').setup {
+  options = {
+    theme = bubbles_theme,
+    component_separators = '|',
+    -- section_separators = { left = '', right = '' },
+    section_separators = { left = "", right = "" },
+  },
+  sections = {
+    lualine_a = {
+        { "filename", file_status = false, path = 1 },
+        {
+            "diagnostics",
+            source = { "nvim" },
+            sections = { "error" },
+            diagnostics_color = { error = { fg = colors.code, bg = colors.red } },
+        },
+        {
+            "diagnostics",
+            source = { "nvim" },
+            sections = { "warn" },
+            diagnostics_color = { warn = { fg = colors.code, bg = colors.bg } },
+        },
+    },
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {
+        {
+            "diff",
+            symbols = { added = ' ', modified = '柳 ', removed = ' ' },
+            diff_color = {
+                added = { fg = colors.text },
+                modified = { fg = colors.text },
+                removed = { fg = colors.text },
+            },
+            cond = conditions.hide_in_width,
+        },
+        "branch"
+    },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  tabline = {},
+  extensions = {},
+}
 
 

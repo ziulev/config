@@ -360,16 +360,16 @@ require("commented").setup({
 
 
 -- Auto Session
--- local function restore_nvim_tree()
-    -- local nvim_tree = require('nvim-tree')
-    -- nvim_tree.change_dir(vim.fn.getcwd())
-    -- nvim_tree.refresh()
+local function restore_nvim_tree()
+    local nvim_tree = require('nvim-tree')
+    nvim_tree.change_dir(vim.fn.getcwd())
+    nvim_tree.refresh()
     -- nvim_tree.toggle()
--- end
--- require('auto-session').setup {
-    -- post_restore_cmds = {restore_nvim_tree, "wincmd h"},
-    -- pre_save_cmds = {"NvimTreeClose"}
--- }
+end
+require('auto-session').setup {
+    post_restore_cmds = {restore_nvim_tree, "wincmd h"},
+    pre_save_cmds = {"NvimTreeClose"}
+}
 
 
 -- Indent
@@ -387,7 +387,7 @@ require('nvim-ts-autotag').setup()
 
 -- Context
 require'treesitter-context'.setup{
-    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    enable = false, -- Enable this plugin (Can be enabled/disabled later via commands)
     throttle = true, -- Throttles plugin updates (may improve performance)
     max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
     -- TODO: check JSON support

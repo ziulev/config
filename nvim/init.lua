@@ -4,7 +4,6 @@ require "keybindings"
 
 
 -- PLUGINS SETUP
-
 require("github-theme").setup({
     theme_style = "dimmed",
 })
@@ -78,6 +77,7 @@ require'nvim-tree'.setup {
         mappings = {
             list = {
                 { key = {"h", "l"}, cb = tree_cb("edit") },
+                { key = "<M-E>", cb = ":wincmd h<CR>" },
             }
         }
     },

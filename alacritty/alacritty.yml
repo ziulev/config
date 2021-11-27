@@ -618,5 +618,7 @@ key_bindings:
   - { key: W,    mods: Command|Shift, chars: "\x1bW" } # alt + W
   - { key: G,    mods: Command, chars: "\x1bg" } # alt + g
   - { key: G,    mods: Command|Shift, chars: "\x1bG" } # alt + G
+  - { key: H,    mods: Command, chars: "\x1bh" } # alt + h
+  - { key: H,    mods: Command|Shift, chars: "\x1bH" } # alt + H
   - { key: Period,    mods: Command, chars: "\x1b." } # alt + .
 

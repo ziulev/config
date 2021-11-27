@@ -422,34 +422,58 @@ vim.cmd[[au VimEnter * highlight MoreMsg guibg=#252b32]]
 
 
 -- Neogit
-require('neogit').setup({})
+require('neogit').setup({
+    mappings = {
+        status = {
+            ["<M-g>"] = "Close",
+            ["<C-G>"] = "Close",
+        }
+    }
+})
 
 
 -- Git diff
 local cb = require'diffview.config'.diffview_callback
 require'diffview'.setup{
-  file_panel = {
-    position = "right",            -- One of 'left', 'right', 'top', 'bottom'
-    width = 40,                   -- Only applies when position is 'left' or 'right'
-    height = 10,                  -- Only applies when position is 'top' or 'bottom'
-  },
+    file_panel = {
+        position = "right",
+        width = 40,
+        height = 10,
+        listing_style = "tree",
+        tree_options = {
+            flatten_dirs = false,
+            folder_statuses = "never"
+        },
+    },
+    use_icons = false,
+    signs = {
+        fold_closed = "▾",
+        fold_open = "▸",
+    },
+    file_history_panel = {
+        position = "top",
+    },
   key_bindings = {
     view = {
+      ["<M-g>"] = ":DiffviewClose<CR>",
+      ["<M-w>"] = ":DiffviewClose<CR>",
       ["<tab>"]      = cb("select_next_entry"),  -- Open the diff for the next file
       ["<s-tab>"]    = cb("select_prev_entry"),  -- Open the diff for the previous file
-      ["gf"]         = cb("goto_file"),          -- Open the file in a new split in previous tabpage
       ["<C-w><C-f>"] = cb("goto_file_split"),    -- Open the file in a new split
       ["<C-w>gf"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
       ["<leader>e"]  = cb("focus_files"),        -- Bring focus to the files panel
       ["<leader>b"]  = cb("toggle_files"),       -- Toggle the files panel.
+      ["s"]             = cb("toggle_stage_entry"),   -- Stage / unstage the selected entry.
     },
     file_panel = {
+      ["<M-g>"] = ":DiffviewClose<CR>",
+      ["<M-w>"] = ":DiffviewClose<CR>",
       ["j"]             = cb("next_entry"),           -- Bring the cursor to the next file entry
       ["<down>"]        = cb("next_entry"),
       ["k"]             = cb("prev_entry"),           -- Bring the cursor to the previous file entry.
       ["<up>"]          = cb("prev_entry"),
       ["<cr>"]          = cb("select_entry"),         -- Open the diff for the selected entry.
-      ["o"]             = cb("select_entry"),
+      ["l"]             = cb("select_entry"),
       ["<2-LeftMouse>"] = cb("select_entry"),
       ["s"]             = cb("toggle_stage_entry"),   -- Stage / unstage the selected entry.
       ["S"]             = cb("stage_all"),            -- Stage all entries.
@@ -458,15 +482,14 @@ require'diffview'.setup{
       ["R"]             = cb("refresh_files"),        -- Update stats and entries in the file list.
       ["<tab>"]         = cb("select_next_entry"),
       ["<s-tab>"]       = cb("select_prev_entry"),
-      ["gf"]            = cb("goto_file"),
-      ["<C-w><C-f>"]    = cb("goto_file_split"),
-      ["<C-w>gf"]       = cb("goto_file_tab"),
       ["i"]             = cb("listing_style"),        -- Toggle between 'list' and 'tree' views
       ["f"]             = cb("toggle_flatten_dirs"),  -- Flatten empty subdirectories in tree listing style.
       ["<leader>e"]     = cb("focus_files"),
       ["<leader>b"]     = cb("toggle_files"),
     },
     file_history_panel = {
+      ["<M-g>"] = ":DiffviewClose<CR>",
+      ["<M-w>"] = ":DiffviewClose<CR>",
       ["g!"]            = cb("options"),            -- Open the option panel
       ["<C-A-d>"]       = cb("open_in_diffview"),   -- Open the entry under the cursor in a diffview
       ["y"]             = cb("copy_hash"),          -- Copy the commit hash of the entry under the cursor
@@ -477,7 +500,6 @@ require'diffview'.setup{
       ["k"]             = cb("prev_entry"),
       ["<up>"]          = cb("prev_entry"),
       ["<cr>"]          = cb("select_entry"),
-      ["o"]             = cb("select_entry"),
       ["<2-LeftMouse>"] = cb("select_entry"),
       ["<tab>"]         = cb("select_next_entry"),
       ["<s-tab>"]       = cb("select_prev_entry"),

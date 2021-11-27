@@ -118,5 +118,8 @@ return require('packer').startup(function()
     use "rktjmp/highlight-current-n.nvim"
 
 
+    use "phaazon/hop.nvim"
+
+
 end)
 

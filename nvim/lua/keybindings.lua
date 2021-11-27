@@ -29,12 +29,13 @@ nvim_set_keymap("n", "<leader>rf", ":lua vim.lsp.buf.formatting()<CR>", default_
 
 
 -- Search (Telescope, defined as Lua strings)
-nvim_set_keymap("n", "<M-p>", ':Telescope frecency<CR>', default_opt)
+nvim_set_keymap("n", "<M-p>", ':lua require"telescope.builtin".find_files()<CR>', default_opt)
 nvim_set_keymap("n", "<leader>p", ':Telescope frecency<CR>', default_opt)
 nvim_set_keymap("n", "<leader>P", ':lua require"telescope.builtin".buffers()<CR>', default_opt)
 nvim_set_keymap("n", "<leader>fb", ':lua require"telescope.builtin".git_branches()<CR>', default_opt)
 nvim_set_keymap("n", "<leader>fr", ":Telescope resume<CR>", default_opt)
 nvim_set_keymap("n", "<leader>fp", ":Telescope pickers<CR>", default_opt)
+nvim_set_keymap("n", "<leader>ff", ':Telescope frecency<CR>', default_opt)
 
 
 -- GoTo

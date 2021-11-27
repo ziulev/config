@@ -600,3 +600,12 @@ require('lualine').setup {
 }
 
 
+-- Highlight local search /
+require("highlight_current_n").setup({
+  highlight_group = "IncSearch" -- highlight group name to use for highlight
+})
+local default_opt = {noremap = true, silent = true}
+vim.api.nvim_set_keymap("n", "n", ":lua require('highlight_current_n').n()<CR>", default_opt)
+vim.api.nvim_set_keymap("n", "N", ":lua require('highlight_current_n').N()<CR>", default_opt)
+
+

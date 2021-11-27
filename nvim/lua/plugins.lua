@@ -115,5 +115,8 @@ return require('packer').startup(function()
     use "rmagatti/auto-session"
 
 
+    use "rktjmp/highlight-current-n.nvim"
+
+
 end)
 

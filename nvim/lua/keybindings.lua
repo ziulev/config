@@ -71,6 +71,9 @@ nvim_set_keymap("n", "<C-G>", ":Neogit<CR>", default_opt)
 nvim_set_keymap("n", "<leader>g", ":DiffviewOpen<CR>", default_opt)
 nvim_set_keymap("n", "<leader>gw", ":DiffviewClose<CR>", default_opt)
 
+-- Gitsigns
+nvim_set_keymap("n", "gb", ":Gitsigns blame_line<CR>", default_opt)
+
 
 -- Paste
 nvim_set_keymap("n", "p", "m`o<ESC>p``", default_opt)

@@ -621,4 +621,5 @@ key_bindings:
   - { key: H,    mods: Command, chars: "\x1bh" } # alt + h
   - { key: H,    mods: Command|Shift, chars: "\x1bH" } # alt + H
   - { key: Period,    mods: Command, chars: "\x1b." } # alt + .
+  - { key: N, mods: Command, action: SpawnNewInstance }
 

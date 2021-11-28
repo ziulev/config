@@ -1,6 +1,7 @@
 local nvim_set_keymap = vim.api.nvim_set_keymap
 local default_opt = {noremap = true, silent = true}
 
+
 -- Navigate splits
 nvim_set_keymap("n", "<C-k>", ":wincmd k<CR>", default_opt)
 nvim_set_keymap("n", "<C-j>", ":wincmd j<CR>", default_opt)

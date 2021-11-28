@@ -457,8 +457,6 @@ require'diffview'.setup{
     view = {
       ["<M-g>"] = ":DiffviewClose<CR>",
       ["<M-w>"] = ":DiffviewClose<CR>",
-      ["<tab>"]      = cb("select_next_entry"),  -- Open the diff for the next file
-      ["<s-tab>"]    = cb("select_prev_entry"),  -- Open the diff for the previous file
       ["<C-w><C-f>"] = cb("goto_file_split"),    -- Open the file in a new split
       ["<C-w>gf"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
       ["<leader>e"]  = cb("focus_files"),        -- Bring focus to the files panel
@@ -466,11 +464,11 @@ require'diffview'.setup{
       ["s"]             = cb("toggle_stage_entry"),   -- Stage / unstage the selected entry.
     },
     file_panel = {
+      ["k"] = cb("select_prev_entry"),
+      ["j"] = cb("select_next_entry"),
       ["<M-g>"] = ":DiffviewClose<CR>",
       ["<M-w>"] = ":DiffviewClose<CR>",
-      ["j"]             = cb("next_entry"),           -- Bring the cursor to the next file entry
       ["<down>"]        = cb("next_entry"),
-      ["k"]             = cb("prev_entry"),           -- Bring the cursor to the previous file entry.
       ["<up>"]          = cb("prev_entry"),
       ["<cr>"]          = cb("select_entry"),         -- Open the diff for the selected entry.
       ["l"]             = cb("select_entry"),
@@ -488,6 +486,8 @@ require'diffview'.setup{
       ["<leader>b"]     = cb("toggle_files"),
     },
     file_history_panel = {
+      ["k"] = cb("select_prev_entry"),
+      ["j"] = cb("select_next_entry"),
       ["<M-g>"] = ":DiffviewClose<CR>",
       ["<M-w>"] = ":DiffviewClose<CR>",
       ["g!"]            = cb("options"),            -- Open the option panel
@@ -495,9 +495,7 @@ require'diffview'.setup{
       ["y"]             = cb("copy_hash"),          -- Copy the commit hash of the entry under the cursor
       ["zR"]            = cb("open_all_folds"),
       ["zM"]            = cb("close_all_folds"),
-      ["j"]             = cb("next_entry"),
       ["<down>"]        = cb("next_entry"),
-      ["k"]             = cb("prev_entry"),
       ["<up>"]          = cb("prev_entry"),
       ["<cr>"]          = cb("select_entry"),
       ["<2-LeftMouse>"] = cb("select_entry"),
